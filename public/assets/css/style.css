@@ -117,6 +117,7 @@ ol {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-style: italic;
+	text-align: center;
 }
 
 .set-bg {
@@ -647,6 +648,7 @@ ol {
 .blog-filter {
 	list-style: none;
 	display: block;
+	text-align: center;
 }
 
 .blog-filter li {
