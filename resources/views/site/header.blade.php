@@ -9,9 +9,27 @@
                 <img src="{{ asset('assets/img/logo.png') }}" alt="">
             </a>
             <nav class="top-nav-area w-100">
-                <div class="user-panel">
-                    <a href="">Login as Steam &nbsp;<i class="fab fa-steam"></i></a>
-                </div>
+
+                    @if (session('statusSteam'))
+                        <div class="alert alert-success">
+                            {{ session('statusSteam') }}
+                        </div>
+                    @endif
+
+
+                    @if (Auth::check())
+                        <div class="user-panel steam-login">
+                            <a href=""><img src="{{ Auth::user()->avatar }}" alt=""></a>
+                            <div class="steam-info-main">
+                                <p class="font-italic steam-login-nickname"><b><a href="">{{ Auth::user()->username }}</a></b></p>
+                                <p class="steam-login-logout"><a href="steamlogout">Выйти</a></p></div>
+                        </div>
+                    @else
+                        <div class="user-panel">
+                            <a href="auth/steam">Login as Steam &nbsp;<i class="fab fa-steam"></i></a>
+                        </div>
+                    @endif
+
                 <!-- Menu -->
                 <ul class="main-menu primary-menu">
                     @foreach ($menu as $item)

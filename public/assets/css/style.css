@@ -1517,6 +1517,40 @@ ol {
 }
 
 /* ----------------
+  Steam
+---------------------*/
+
+.user-panel {
+	display: flex;
+}
+
+.steam-login {
+	margin-top: -14px;
+}
+
+.steam-login-nickname a {
+	color: #b01ba5;
+}
+
+.steam-login-logout a {
+	color: #6f6d6b;
+}
+
+.steam-login-logout a:hover, .steam-login-nickname a:hover {
+	color: #993939;
+}
+
+.user-panel p:first-child {
+	margin-bottom: 0;
+}
+
+.user-panel img {
+	width: 44px;
+	height: 44px;
+	margin-right: 12px;
+}
+
+/* ----------------
   Responsive
 ---------------------*/
 

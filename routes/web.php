@@ -12,3 +12,10 @@ Route::group([], function () {
 // Auth
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Steam
+Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');
+Route::get('auth/steam/handle', 'AuthController@handle')->name('auth.steam.handle');
+
+Route::get('steamlogin', 'AuthController@handle');
+Route::get('steamlogout', 'AuthController@getLogout');
