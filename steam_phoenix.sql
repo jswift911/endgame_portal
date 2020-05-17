@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Май 13 2020 г., 18:20
+-- Время создания: Май 17 2020 г., 18:11
 -- Версия сервера: 5.6.38-log
 -- Версия PHP: 7.1.12
 
@@ -159,7 +159,6 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (4, '2020_05_13_084151_create_table_intros', 1),
 (5, '2020_05_13_084325_create_table_blogs', 1),
@@ -167,7 +166,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2020_05_13_085751_create_table_sliders', 1),
 (9, '2020_05_13_084108_create_table_menus', 1),
 (10, '2020_05_13_084353_create_table_videos', 1),
-(11, '2020_05_13_143550_create_table_filters', 2);
+(11, '2020_05_13_143550_create_table_filters', 1),
+(15, '2014_10_12_000000_create_users_table', 1);
 
 -- --------------------------------------------------------
 
@@ -211,15 +211,23 @@ INSERT INTO `sliders` (`id`, `title`, `text`, `img`, `created_at`, `updated_at`)
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `steamid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `avatar`, `steamid`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'jswift911', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/7f/7f2d358ef0e79d35168979065e354d120f8ea769_full.jpg', '76561198129543963', 'admin', 'QkTsR056lSvw8EqKfwLrhsKWzqT1lIwxrYOeA2yi3r5EbboxJvLhNcCHnwLL', '2020-05-15 09:21:21', '2020-05-15 09:21:21'),
+(2, 'Toster', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c82b74a992cae43b93ffca71d9688e60717d40d7_full.jpg', '76561198070025912', 'user', 'erFZnFU9vMbdxFmiTho0fp1JnwQYk0I1FMZbmZLjndpoOaXX0FgH0Fq2hvIz', '2020-05-15 10:03:42', '2020-05-15 10:34:25');
 
 -- --------------------------------------------------------
 
@@ -242,7 +250,7 @@ CREATE TABLE `videos` (
 --
 
 INSERT INTO `videos` (`id`, `title`, `text`, `promo_img`, `video_link`, `created_at`, `updated_at`) VALUES
-(1, 'Promo video of the game', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', 'assets/img/promo-bg.jpg', 'https://www.youtube.com/watch?v=Yi2eHPKjW9k', '2020-05-13 12:13:00', '2020-05-13 12:13:00');
+(1, 'Promo video of the game', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', 'assets/img/promo-bg.jpg', 'https://www.youtube.com/watch?v=0sPbjHEnSDE', '2020-05-13 12:13:00', '2020-05-13 12:13:00');
 
 --
 -- Индексы сохранённых таблиц
@@ -301,7 +309,7 @@ ALTER TABLE `sliders`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_steamid_unique` (`steamid`);
 
 --
 -- Индексы таблицы `videos`
@@ -347,7 +355,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `sliders`
@@ -359,7 +367,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `videos`

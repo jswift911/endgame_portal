@@ -19,9 +19,9 @@
 
                     @if (Auth::check())
                         <div class="user-panel steam-login">
-                            <a href=""><img src="{{ Auth::user()->avatar }}" alt=""></a>
+                            <a href="{{ route('profile') }}"><img src="{{ Auth::user()->avatar }}" alt=""></a>
                             <div class="steam-info-main">
-                                <p class="font-italic steam-login-nickname"><b><a href="">{{ Auth::user()->username }}</a></b></p>
+                                <p class="font-italic steam-login-nickname"><b><a href="{{ route('profile') }}">{{ Auth::user()->username }}</a></b></p>
                                 <p class="steam-login-logout"><a href="steamlogout">Выйти</a></p></div>
                         </div>
                     @else

@@ -7,11 +7,15 @@ Route::group([], function () {
 });
 
 
+// Admin (profile)
+Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
+    Route::get('/', 'DashboardController@dashboard')->name('profile');
+//    Route::resource('/category', 'CategoryController', ['as'=>'admin']);
+});
 
 
 // Auth
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 // Steam
 Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');

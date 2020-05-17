@@ -1551,6 +1551,84 @@ ol {
 }
 
 /* ----------------
+  Profile
+---------------------*/
+
+.profile {
+	height: 100vh;
+}
+
+.profile-panel {
+	display: flex;
+}
+
+.profile-panel img {
+	width: 164px;
+	height: 164px;
+	margin-bottom: 10px;
+}
+
+.profile_avatar {
+	width: 32px;
+	height: 32px;
+}
+
+.steam-info-profile {
+	margin-left: 18px;
+}
+
+.steam-info-profile .steam-login-nickname {
+	margin-bottom: 0;
+	font-size: 32px;
+}
+
+.role_a {
+	color: #dd1616d6;
+}
+
+.role_u {
+	color: #959595;
+}
+
+.spad-profile {
+	padding-top: 50px;
+}
+
+.pagination .page-link {
+	background-color: #32383e;
+	color: white;
+	border: 1px solid #46063f;
+}
+
+.pagination .page-item.disabled .page-link {
+	background-color: #32383e;
+	color: white;
+	border: 1px solid #46063f;
+}
+
+.pagination .page-item.active .page-link {
+	background-color: #970981;
+	color: white;
+	border: 1px solid #970981;
+}
+
+.profile_title {
+	color: #dfdfdf;
+	font-size: 28px;
+	text-align: center;
+	margin-bottom: 14px;
+}
+
+.profile_title_control {
+	margin-top: 40px;
+	color: #dfdfdf;
+	font-size: 28px;
+	text-align: center;
+	margin-bottom: 14px;
+}
+
+
+/* ----------------
   Responsive
 ---------------------*/
 
