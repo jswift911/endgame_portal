@@ -1558,6 +1558,14 @@ ol {
 	height: 100vh;
 }
 
+.profile table a {
+	color: white;
+}
+
+.profile table a:hover {
+	color: #993939;
+}
+
 .profile-panel {
 	display: flex;
 }

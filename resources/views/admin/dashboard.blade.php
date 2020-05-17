@@ -42,7 +42,7 @@
                             @foreach ($profile_admin as $user)
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->username }}</td>
+                                <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid }}/">{{ $user->username }}</a></td>
                                 <td><img class="profile_avatar" src="{{ $user->avatar }}" alt=""></td>
                                 <td>{{ $user->steamid }}</td>
                                 <td>@if ($user->role == 'admin') Администратор @else Пользователь @endif</td>

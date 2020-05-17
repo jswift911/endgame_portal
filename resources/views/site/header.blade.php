@@ -5,7 +5,7 @@
         @if (isset($menu))
         <div class="header-bar-warp d-flex">
             <!-- site logo -->
-            <a href="home.html" class="site-logo">
+            <a href="{{ route('index') }}" class="site-logo">
                 <img src="{{ asset('assets/img/logo.png') }}" alt="">
             </a>
             <nav class="top-nav-area w-100">

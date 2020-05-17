@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function dashboard() {
 
         //Чтобы сработал метод paginate, необходимо возвращать не коллекцию, поэтому используем метод where
-        $profile = User::where('id','>=',1)->paginate(3);
+        $profile = User::where('id','>=',1)->orderBy('role', 'asc')->paginate(3);
 
         return view('admin.dashboard', ['profile_admin' => $profile]);
     }

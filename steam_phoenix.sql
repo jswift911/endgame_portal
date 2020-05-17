@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Май 17 2020 г., 18:11
+-- Время создания: Май 17 2020 г., 18:44
 -- Версия сервера: 5.6.38-log
 -- Версия PHP: 7.1.12
 
@@ -226,8 +226,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `avatar`, `steamid`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'jswift911', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/7f/7f2d358ef0e79d35168979065e354d120f8ea769_full.jpg', '76561198129543963', 'admin', 'QkTsR056lSvw8EqKfwLrhsKWzqT1lIwxrYOeA2yi3r5EbboxJvLhNcCHnwLL', '2020-05-15 09:21:21', '2020-05-15 09:21:21'),
-(2, 'Toster', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c82b74a992cae43b93ffca71d9688e60717d40d7_full.jpg', '76561198070025912', 'user', 'erFZnFU9vMbdxFmiTho0fp1JnwQYk0I1FMZbmZLjndpoOaXX0FgH0Fq2hvIz', '2020-05-15 10:03:42', '2020-05-15 10:34:25');
+(1, 'jswift911', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/7f/7f2d358ef0e79d35168979065e354d120f8ea769_full.jpg', '76561198129543963', 'admin', 'GCEKUIBpEs4KdshrDp06Egp1DQiJbN70gIPBmhIHaxVBVaSizU34Wmla8W8V', '2020-05-15 09:21:21', '2020-05-15 09:21:21'),
+(2, 'Toster', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c82b74a992cae43b93ffca71d9688e60717d40d7_full.jpg', '76561198070025912', 'user', 'erFZnFU9vMbdxFmiTho0fp1JnwQYk0I1FMZbmZLjndpoOaXX0FgH0Fq2hvIz', '2020-05-15 10:03:42', '2020-05-15 10:34:25'),
+(3, 'Moody', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/f4/f42a606b37c2bfdf328b2b6cd3c65d90b723e925_full.jpg', '76561198056491553', 'user', NULL, '2020-05-17 15:34:27', '2020-05-17 15:34:27'),
+(4, 'BiG LEBOWSKi', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/2e/2e8192df7f2de76163c3e597a20cb940ca87d7f7_full.jpg', '76561198041649056', 'user', NULL, '2020-05-17 15:38:40', '2020-05-17 15:38:40');
 
 -- --------------------------------------------------------
 
@@ -367,7 +369,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `videos`
