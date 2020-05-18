@@ -1553,9 +1553,15 @@ ol {
 /* ----------------
   Profile
 ---------------------*/
+.profile-section {
+	background: linear-gradient(45deg, #501755 0%, #2d1854 100%);
+	background-size: cover;
+	height: 100%;
+}
+
 
 .profile {
-	height: 100vh;
+	background-size: cover;
 }
 
 .profile table a {
@@ -1628,13 +1634,21 @@ ol {
 }
 
 .profile_title_control {
-	margin-top: 40px;
+	margin: 60px 0;
 	color: #dfdfdf;
 	font-size: 28px;
 	text-align: center;
-	margin-bottom: 14px;
+	margin-bottom: 24px;
 }
 
+.control-buttons {
+	text-align: center;
+}
+
+.control-buttons a {
+	margin: 10px;
+	width: 160px;
+}
 
 /* ----------------
   Responsive

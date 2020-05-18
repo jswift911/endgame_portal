@@ -2,10 +2,11 @@
 
 @section('content')
     <!-- Blog section -->
+    <div class="profile-section">
         <section class="blog-section spad-profile profile">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-4">
+                    <div class="col-xl-4 col-lg-4 col-md-5">
                         @if (Auth::check())
                             <div class="profile-panel steam-login">
                                 <img src="{{ Auth::user()->avatar }}" alt="">
@@ -59,10 +60,19 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <h2 class="profile_title_control">Управление сайтом</h2>
+                        <div class="control-buttons">
+                            <a class="btn btn-dark" href="">Меню</a>
+                            <a class="btn btn-dark" href="">Слайдер</a>
+                            <a class="btn btn-dark" href="">Интро</a>
+                            <a class="btn btn-dark" href="">Блог</a>
+                            <a class="btn btn-dark" href="">Видео</a>
+                            <a class="btn btn-dark" href="">Feature</a>
+                        </div>
                     </div>
                 </div>
             </div>
             @endif
         </section>
+    </div>
     <!-- Blog section end -->
 @endsection
