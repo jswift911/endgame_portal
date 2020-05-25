@@ -10,7 +10,7 @@ class IndexController extends Controller
     public function execute(Request $request) {
 
         // Выборка всех данных из БД. Везде можно использовать метод all();
-        $menus = Menu::get(['name','alias','submenu']);
+        $menus = Menu::get(['id','name','alias','submenu']);
         $sliders = Slider::get(['id','text', 'title', 'img']);
         $intros = Intro::where('id','<',20)->get();
         $blogs = Blog::take(3)->get();

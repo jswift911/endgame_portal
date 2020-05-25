@@ -1608,6 +1608,10 @@ ol {
 	padding-top: 50px;
 }
 
+.pagination {
+	padding-bottom: 20px;
+}
+
 .pagination .page-link {
 	background-color: #32383e;
 	color: white;
@@ -1646,8 +1650,48 @@ ol {
 }
 
 .control-buttons a {
-	margin: 10px;
+	margin: 5px 5px;
 	width: 160px;
+}
+
+.breadcrumb {
+	background-color: #212529;
+	margin-bottom: 0;
+}
+
+.breadcrumb h4 {
+	margin-right: 30px;
+	padding-top: 10px;
+	color: white;
+}
+
+.breadcrumb input {
+	width: 260px;
+	height: 32px;
+}
+
+.form-add {
+	background: #212529;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.form-add p {
+	color: white;
+	margin: 10px;
+}
+
+.form-add input, .form-add input:focus {
+	background-color: #7a7a7bf2;
+	border-color: black;
+	color: #131313;
+}
+
+
+.table a i {
+	margin-right: 10px;
 }
 
 /* ----------------

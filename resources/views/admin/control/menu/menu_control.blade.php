@@ -2,8 +2,24 @@
 
 @section('content')
     <!-- Blog section -->
-
     <div class="profile-section">
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('status'))
+            <div class="alert alert-dark">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <section class="blog-section spad-profile profile">
             <div class="container">
                 <div class="row">
@@ -28,33 +44,43 @@
                         @endif
                     </div>
                     @if (Auth::user()->role == 'admin')
-                    <div class="col-xl-8 col-lg-8 col-md-8">
-                        <h2 class="profile_title">Список пользователей</h2>
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Аватар</th>
-                                <th scope="col">Steam_id</th>
-                                <th scope="col">Права доступа</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($profile_admin as $user)
-                            <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid }}/">{{ $user->username }}</a></td>
-                                <td><img class="profile_avatar" src="{{ $user->avatar }}" alt=""></td>
-                                <td>{{ $user->steamid }}</td>
-                                <td>@if ($user->role == 'admin') Администратор @else Пользователь @endif</td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{--Кнопка для пагинации. Параметр "pagination::bootstrap-4" - чтобы разрешить менять стили через css--}}
-                        {{ $profile_admin->links() }}
-                    </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8">
+                            <div class="breadcrumb">
+                                <h4>Меню</h4>
+                                <div class="control-buttons">
+                                    <a class="btn btn-success" href="{{ route('menuAdd') }}">Добавить</a>
+                                </div>
+                            </div>
+                            <table class="table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Псевдоним</th>
+                                    <th scope="col">Функции</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($menu as $item)
+                                    <tr>
+                                        <th scope="row">{{ $item->id }}</th>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->alias }}</td>
+                                        <td>
+                                            <a href="">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            <a href="">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            {{--Кнопка для пагинации--}}
+                            {{ $menu->links() }}
+                        </div>
                     @endif
                 </div>
                 @if (Auth::user()->role == 'admin')

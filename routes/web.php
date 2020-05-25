@@ -10,7 +10,12 @@ Route::group([], function () {
 // Admin (profile)
 Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
     Route::get('/', 'DashboardController@dashboard')->name('profile');
-//    Route::resource('/category', 'CategoryController', ['as'=>'admin']);
+
+    //admin/profile/control-menu
+    Route::match(['GET', 'POST'],'/menu-control', 'ControlController@indexMenu')->name('menu-control');
+
+    //admin/profile/add-menu
+    Route::match(['GET', 'POST'],'/add-menu', ['uses'=>'ControlController@indexAddMenu','as'=>'menuAdd']);
 });
 
 
@@ -22,4 +27,4 @@ Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');
 Route::get('auth/steam/handle', 'AuthController@handle')->name('auth.steam.handle');
 
 Route::get('steamlogin', 'AuthController@handle');
-Route::get('steamlogout', 'AuthController@getLogout');
+Route::get('steamlogout', 'AuthController@getLogout')->name('steamlogout');
