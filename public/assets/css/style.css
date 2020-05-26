@@ -1694,6 +1694,26 @@ ol {
 	margin-right: 10px;
 }
 
+.control-forms {
+	display: flex;
+}
+
+.control-forms button {
+	border: none;
+	background-color: transparent;
+	color: white;
+	cursor: pointer;
+}
+
+.control-forms button:hover {
+	color: #993939;
+}
+
+/* Ошибки валидации */
+.alert.alert-danger ul li {
+	list-style-type: none;
+}
+
 /* ----------------
   Responsive
 ---------------------*/

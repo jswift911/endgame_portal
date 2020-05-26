@@ -11,11 +11,16 @@ Route::group([], function () {
 Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
     Route::get('/', 'DashboardController@dashboard')->name('profile');
 
+
+    //----МЕНЮ----//
+
     //admin/profile/control-menu
     Route::match(['GET', 'POST'],'/menu-control', 'ControlController@indexMenu')->name('menu-control');
-
     //admin/profile/add-menu
     Route::match(['GET', 'POST'],'/add-menu', ['uses'=>'ControlController@indexAddMenu','as'=>'menuAdd']);
+    //admin/profile/menu-control/edit/2
+    Route::match(['GET', 'POST', 'DELETE'], '/edit/{menu}', ['uses'=>'ControlController@indexEditMenu','as'=>'menuEdit']);
+
 });
 
 

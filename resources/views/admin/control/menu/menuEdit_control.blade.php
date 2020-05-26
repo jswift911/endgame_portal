@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        <section class="blog-section spad-profile profile">
+        <section class="spad-profile profile">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-5">
@@ -43,54 +43,18 @@
                             </div>
                         @endif
                     </div>
-                    @if (Auth::user()->role == 'admin')
-                        <div class="col-xl-8 col-lg-8 col-md-8">
-                            <div class="breadcrumb">
-                                <h4>Меню</h4>
-                                <div class="control-buttons">
-                                    <a class="btn btn-success" href="{{ route('menuAdd') }}">Добавить</a>
-                                </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <form action="{{ route('menuEdit', ['menu'=>$data['id']]) }}" method="post" class="form-add">
+                            @csrf
+                            <p>Пункт меню: <p>
+                            <input name="name" value="{{ $data['name'] }}" type="text" class="form-control">
+                            <input name="alias" type="hidden">
+                            <div class="control-buttons">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
                             </div>
-                            <table class="table table-dark">
-                                <thead>
-                                <tr>
-                                    <th scope="col">id</th>
-                                    <th scope="col">Имя</th>
-                                    <th scope="col">Псевдоним</th>
-                                    <th scope="col">Функции</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($menu as $item)
-                                    <tr>
-                                        <th scope="row">{{ $item->id }}</th>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->alias }}</td>
-                                        <td class="control-forms">
-                                            <form action="" method="post">
-                                                @csrf
-                                            <a href="{{ route('menuEdit', ['menu'=>$item->id]) }}">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                            </form>
-                                            <form action="{{ route('menuEdit', ['menu'=>$item->id]) }}" method="post">
-                                                @csrf
-                                                {{ method_field('DELETE') }}
-                                            <button href="submit">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            {{--Кнопка для пагинации--}}
-                            {{ $menu->links() }}
-                        </div>
-                    @endif
+                        </form>
+                    </div>
                 </div>
-                @if (Auth::user()->role == 'admin')
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <h2 class="profile_title_control">Управление сайтом</h2>
@@ -105,7 +69,6 @@
                     </div>
                 </div>
             </div>
-            @endif
         </section>
     </div>
     <!-- Blog section end -->
