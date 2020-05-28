@@ -1,9 +1,7 @@
 @extends('layouts.site')
 
-
 @section('content')
     <!-- Blog section -->
-
     <div class="profile-section">
 
         @if (count($errors) > 0)
@@ -46,33 +44,52 @@
                         @endif
                     </div>
                     @if (Auth::user()->role == 'admin')
-                    <div class="col-xl-8 col-lg-8 col-md-8">
-                        <h2 class="profile_title">Список пользователей</h2>
-                        <table class="table table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Имя</th>
-                                <th scope="col">Аватар</th>
-                                <th scope="col">Steam_id</th>
-                                <th scope="col">Права доступа</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($profile_admin as $user)
-                            <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid }}/">{{ $user->username }}</a></td>
-                                <td><img class="profile_avatar" src="{{ $user->avatar }}" alt=""></td>
-                                <td>{{ $user->steamid }}</td>
-                                <td>@if ($user->role == 'admin') Администратор @else Пользователь @endif</td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{--Кнопка для пагинации. Параметр "pagination::bootstrap-4" - чтобы разрешить менять стили через css--}}
-                        {{ $profile_admin->links() }}
-                    </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8">
+                            <div class="breadcrumb">
+                                <h4>Слайдер</h4>
+                                <div class="control-buttons">
+                                    <a class="btn btn-success" href="{{ route('sliderAdd') }}">Добавить слайд</a>
+                                </div>
+                            </div>
+                            <table class="table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Заголовок</th>
+                                    <th scope="col">Текст</th>
+                                    <th scope="col">Изображение</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($sliders as $item)
+                                    <tr>
+                                        <th scope="row">{{ $item->id }}</th>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->text }}</td>
+                                        <td>{{ $item->img }}</td>
+                                        <td class="control-forms">
+                                            <form action="" method="post">
+                                                @csrf
+                                            <a href="{{ route('sliderEdit', ['sliders'=>$item->id]) }}">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            </form>
+                                            <form action="{{ route('sliderEdit', ['sliders'=>$item->id]) }}" method="post">
+                                                @csrf
+                                                {{ method_field('DELETE') }}
+                                            <button href="submit">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            {{--Кнопка для пагинации--}}
+                            {{ $sliders->links() }}
+                        </div>
                     @endif
                 </div>
                 @if (Auth::user()->role == 'admin')
@@ -95,4 +112,3 @@
     </div>
     <!-- Blog section end -->
 @endsection
-

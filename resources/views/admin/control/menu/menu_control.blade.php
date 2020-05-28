@@ -57,7 +57,7 @@
                                     <th scope="col">id</th>
                                     <th scope="col">Имя</th>
                                     <th scope="col">Псевдоним</th>
-                                    <th scope="col">Функции</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +96,7 @@
                         <h2 class="profile_title_control">Управление сайтом</h2>
                         <div class="control-buttons">
                             <a class="btn btn-dark" href="{{ route('menu-control') }}">Меню</a>
-                            <a class="btn btn-dark" href="#">Слайдер</a>
+                            <a class="btn btn-dark" href="{{ route('slider-control') }}">Слайдер</a>
                             <a class="btn btn-dark" href="#">Интро</a>
                             <a class="btn btn-dark" href="#">Блог</a>
                             <a class="btn btn-dark" href="#">Видео</a>

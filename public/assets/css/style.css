@@ -1562,6 +1562,7 @@ ol {
 
 .profile {
 	background-size: cover;
+	background: linear-gradient(45deg, #501755 0%, #2d1854 100%);
 }
 
 .profile table a {
@@ -1676,6 +1677,7 @@ ol {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	border-radius: 10px;
 }
 
 .form-add p {
@@ -1687,6 +1689,39 @@ ol {
 	background-color: #7a7a7bf2;
 	border-color: black;
 	color: #131313;
+}
+
+.form-add-many {
+	background: #212529;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.form-add-many p {
+	color: white;
+	margin: 10px;
+}
+
+.form-add-many input,
+.form-add-many input:focus,
+.form-add-many textarea,
+.form-add-many textarea:focus,
+.form-add-many textarea::placeholder {
+	background-color: #7a7a7bf2;
+	border-color: black;
+	color: #131313;
+}
+
+.form-add-many .control-buttons {
+	margin: 20px 0;
+}
+
+.form-add-many input.form-control,
+.form-add-many input.form-control::placeholder {
+	background-color: #7a7a7bf2;
+	border-color: black;
+	color: #131313;
+	border-radius: 10px;
 }
 
 

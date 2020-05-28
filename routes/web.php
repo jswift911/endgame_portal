@@ -1,9 +1,9 @@
 <?php
 
 
+// Главная
 Route::group([], function () {
     Route::match(['GET', 'POST'], '/',['uses'=>'IndexController@execute','as'=>'index']);
-    //Route::get('/page/{alias}',['uses'=>'PageController@execute', 'as'=>'page']);
 });
 
 
@@ -12,14 +12,23 @@ Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['a
     Route::get('/', 'DashboardController@dashboard')->name('profile');
 
 
-    //----МЕНЮ----//
+    //----Меню----//
 
     //admin/profile/control-menu
     Route::match(['GET', 'POST'],'/menu-control', 'ControlController@indexMenu')->name('menu-control');
     //admin/profile/add-menu
     Route::match(['GET', 'POST'],'/add-menu', ['uses'=>'ControlController@indexAddMenu','as'=>'menuAdd']);
-    //admin/profile/menu-control/edit/2
-    Route::match(['GET', 'POST', 'DELETE'], '/edit/{menu}', ['uses'=>'ControlController@indexEditMenu','as'=>'menuEdit']);
+    //admin/profile/edit/2
+    Route::match(['GET', 'POST', 'DELETE'], '/menu/edit/{menu}', ['uses'=>'ControlController@indexEditMenu','as'=>'menuEdit']);
+
+    //----Слайдер----//
+
+    //admin/profile/control-slider
+    Route::match(['GET', 'POST'],'/slider-control', 'ControlController@indexSlider')->name('slider-control');
+    //admin/profile/add-slider
+    Route::match(['GET', 'POST'],'/add-slider', ['uses'=>'ControlController@indexAddSlider','as'=>'sliderAdd']);
+    //admin/profile/edit/2
+    Route::match(['GET', 'POST', 'DELETE'], '/slider/edit/{slider}', ['uses'=>'ControlController@indexEditSlider','as'=>'sliderEdit']);
 
 });
 
