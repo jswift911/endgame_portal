@@ -44,7 +44,8 @@
                         @endif
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-8">
-                        <form action="{{ route('sliderAdd') }}" method="post" class="form-add-many">
+                        {{--Обязательно enctype = "multipart/form-data" если грузим файл, иначе hasFile будет false--}}
+                        <form action="{{ route('sliderAdd') }}" method="post" class="form-add-many" enctype = "multipart/form-data">
                             @csrf
                             <p>Заголовок: <p>
                             <input name="title" type="text" class="form-control" placeholder="Заголовок">

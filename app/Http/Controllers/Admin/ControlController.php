@@ -183,13 +183,15 @@ class ControlController extends Controller
             if($request->hasFile('img')) {
                 $file = $request->file('img'); // имя поля загрузки на сервер
 
-                $input['img'] = '123'; // Получить оригинальное имя файла, без пути
-//
-//                $file->move(public_path(),$input['img']); // сохраняем в каталог
+                $fileName = $file->getClientOriginalName(); // Получить оригинальное имя файла, без пути
+                $input['img'] = 'assets/img/' . $fileName;
+
+                // Куда, Откуда
+                $file->move(public_path().'/assets/img', $fileName); // сохраняем в каталог
 
             }
 
-            dd($request->hasFile('img'));
+
 
 
             $slider->fill($input); // Заполняет поля модели данными
@@ -206,12 +208,12 @@ class ControlController extends Controller
 
     }
 
-    public function indexEditSlider(Menu $menu, Request $request) {
+    public function indexEditSlider(Slider $slider, Request $request) {
 
         // Удаление
         if($request->isMethod('delete')) {
-            $menu->delete();
-            return redirect('profile/menu-control')->with('status','Пункт меню успешно удален');
+            $slider->delete();
+            return redirect('profile/slider-control')->with('status','Слайд успешно удален');
         }
 
         // Редактирование
@@ -231,33 +233,48 @@ class ControlController extends Controller
 
             $validator = Validator::make($input, [
 
-                'name' => 'required|unique:menus|max:100',
+                'title' => 'required|max:50',
+                'text' => 'required',
 
             ], $massages);
 
             if($validator->fails()) {
                 return redirect()
-                    ->route('menuEdit',['menu'=>$input['id']])
+                    ->route('sliderEdit',['slider'=>$input['id']])
                     ->withErrors($validator);
             }
 
+            if($request->hasFile('img')) {
+                $file = $request->file('img');
+                $fileName = $file->getClientOriginalName();
+                $input['img'] = 'assets/img/' . $fileName;
+                $file->move(public_path().'/assets/img', $fileName);
+            }
+            else {
+                // Если файл не загружен пользователем, используем старое из БД
+                $input['img'] = $input['old_images'];
+            }
 
-            $menu->fill($input); // заполняем поля из переменной $input
+            // при сохранении удаляем лишнее в нашем случае старое изображение
+            unset($input['old_images']);
 
-            if($menu->update()) {
-                return redirect('profile/menu-control')->with('status','Пункт меню отредактирован');
+
+            $slider->fill($input); // заполняем поля из переменной $input
+
+            if($slider->update()) {
+                return redirect('profile/slider-control')->with('status','Слайд отредактирован');
             }
 
         }
 
 
-        $old = $menu->toArray();
-        if(view()->exists('admin.control.menu.menuEdit_control')) {
+        $old = $slider->toArray();
+        if(view()->exists('admin.control.slider.sliderEdit_control')) {
 
             $data = [
                 'data' => $old
             ];
-            return view('admin.control.menu.menuEdit_control',$data);
+            return view('admin.control.slider.sliderEdit_control',$data);
 
         }
 
