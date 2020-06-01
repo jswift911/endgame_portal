@@ -155,7 +155,8 @@ class ControlController extends Controller
             $massages = [
 
                 'required' => 'Поле :attribute обязательно к заполнению',
-                'unique' => 'Поле :attribute должно быть уникальным'
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png'
 
             ];
 
@@ -164,7 +165,7 @@ class ControlController extends Controller
 
                 'title' => 'required|max:100',
                 'text' => 'required',
-                'img' => 'required',
+                'img' => 'required|mimes:jpg,jpeg,png',
 
             ], $massages);
 
@@ -220,7 +221,8 @@ class ControlController extends Controller
             $massages = [
 
                 'required' => 'Поле :attribute обязательно к заполнению',
-                'unique' => 'Поле :attribute должно быть уникальным'
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg ,jpeg, png'
 
             ];
 
@@ -229,6 +231,7 @@ class ControlController extends Controller
 
                 'title' => 'required|max:50',
                 'text' => 'required',
+                'img' => 'mimes:jpg,jpeg,png',
 
             ], $massages);
 
@@ -310,14 +313,15 @@ class ControlController extends Controller
             $massages = [
 
                 'required' => 'Поле :attribute обязательно к заполнению',
-                'unique' => 'Поле :attribute должно быть уникальным'
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'not_in' => 'Выберите категорию из списка'
 
             ];
 
 
             $validator = Validator::make($input, [
 
-                'category' => 'required',
+                'category' => 'required|not_in:Выберите категорию',
                 'title' => 'required|max:100',
                 'text' => 'required',
 
