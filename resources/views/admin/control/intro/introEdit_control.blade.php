@@ -11,18 +11,20 @@
                 <div class="row">
                     @include('admin.widgets.steam_panel')
                     <div class="col-xl-8 col-lg-8 col-md-8">
-                        <form action="{{ route('sliderEdit', ['slider'=>$data['id']]) }}" method="post" class="form-add-many" enctype="multipart/form-data">
+                        <form action="{{ route('introEdit', ['intro'=>$data['id']]) }}" method="post" class="form-add-many">
                             @csrf
                             <input name="id" type="hidden" value="{{ $data['id'] }}">
+                            <p>Категория: <p>
+                                <select name="category" class="custom-select">
+                                    <option selected disabled>{{ $data['category'] }}</option>
+                                    @foreach ($intros as $item)
+                                        <option name="category" value="{{ $item->category }}">{{ $item->category }}</option>
+                                    @endforeach
+                                </select>
                             <p>Заголовок: <p>
                                 <input name="title" value="{{ $data['title'] }}" type="text" class="form-control" placeholder="Заголовок">
                             <p>Текст: <p>
                                 <textarea id="editor" class="form-control" placeholder="Текст" name="text" cols="50" rows="10">{{ $data['text'] }}</textarea>
-                            <p>Текущее изображение: <p>
-                                <img src="{{ '/'.$data['img'] }}" class="img-circle img-responsive" width="150px" alt="">
-                                <input name="old_images" type="hidden" value="{{ $data['img'] }}" id="old_images">
-                            <p>Изображение (рекомендуемый размер 1920х919): <p>
-                                <input class="filestyle" data-buttonText="Выберите изображение" data-buttonName="btn-primary" data-placeholder="Выберите файл" name="img" type="file" id="img">
                             <div class="control-buttons">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
                             </div>

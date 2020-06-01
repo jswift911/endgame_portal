@@ -13,41 +13,41 @@
                     @if (Auth::user()->role == 'admin')
                         <div class="col-xl-8 col-lg-8 col-md-8">
                             <div class="breadcrumb">
-                                <h4>Слайдер</h4>
+                                <h4>Интро</h4>
                                 <div class="control-buttons">
-                                    <a class="btn btn-success" href="{{ route('sliderAdd') }}">Добавить слайд</a>
+                                    <a class="btn btn-success" href="{{ route('introAdd') }}">Добавить блок</a>
                                 </div>
                             </div>
                             <table class="table table-dark">
                                 <thead>
                                 <tr>
                                     <th scope="col">id</th>
+                                    <th scope="col">Категория</th>
                                     <th scope="col">Заголовок</th>
                                     <th scope="col">Текст</th>
-                                    <th scope="col">Изображение</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($sliders as $item)
+                                @foreach ($intros as $item)
                                     <tr>
                                         <th scope="row">{{ $item->id }}</th>
+                                        <td>{{ $item->category }}</td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->text }}</td>
-                                        <td>{{ $item->img }}</td>
                                         <td class="control-forms">
                                             <form action="" method="post">
                                                 @csrf
-                                            <a href="{{ route('sliderEdit', ['sliders'=>$item->id]) }}">
-                                                <i class="far fa-edit"></i>
-                                            </a>
+                                                <a href="{{ route('introEdit', ['intros'=>$item->id]) }}">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
                                             </form>
-                                            <form action="{{ route('sliderEdit', ['sliders'=>$item->id]) }}" method="post">
+                                            <form action="{{ route('introEdit', ['intros'=>$item->id]) }}" method="post">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
-                                            <button href="submit">
-                                                <i class="fas fa-times"></i>
-                                            </button>
+                                                <button href="submit">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -55,7 +55,7 @@
                                 </tbody>
                             </table>
                             {{--Кнопка для пагинации--}}
-                            {{ $sliders->links() }}
+                            {{ $intros->links() }}
                         </div>
                     @endif
                 </div>

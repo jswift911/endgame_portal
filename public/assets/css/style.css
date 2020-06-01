@@ -1702,6 +1702,12 @@ ol {
 	margin: 10px;
 }
 
+.form-add-many select {
+	background-color: #7a7a7bf2;
+	border-color: black;
+	color: #131313;
+}
+
 .form-add-many input,
 .form-add-many input:focus,
 .form-add-many textarea,

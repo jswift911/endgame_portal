@@ -6,6 +6,8 @@ use App\Control;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\{Blog, Feature, Filter, Intro, Menu, Slider, Video};
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -135,19 +137,10 @@ class ControlController extends Controller
     public function indexSlider()
     {
         $profile_sliders = Slider::where('id', '>=', 1)->paginate(2);
-        $profile_intros = Intro::where('id', '>=', 1)->paginate(4);
-        $profile_blogs = Blog::where('id', '>=', 1)->paginate(4);
-        $profile_filters = Filter::where('id', '>=', 1)->paginate(4);
-        $profile_videos = Video::where('id', '>=', 1)->paginate(4);
-        $profile_features = Feature::where('id', '>=', 1)->paginate(4);
+
 
         return view('admin.control.slider.slider_control', [
             'sliders' => $profile_sliders,
-            'intros' => $profile_intros,
-            'blogs' => $profile_blogs,
-            'videos' => $profile_videos,
-            'features' => $profile_features,
-            'filters' => $profile_filters,
         ]);
     }
 
@@ -212,6 +205,7 @@ class ControlController extends Controller
 
         // Удаление
         if($request->isMethod('delete')) {
+            File::delete($slider->img);
             $slider->delete();
             return redirect('profile/slider-control')->with('status','Слайд успешно удален');
         }
@@ -245,6 +239,9 @@ class ControlController extends Controller
             }
 
             if($request->hasFile('img')) {
+                // Удаляем старое изображение
+                File::delete($input['old_images']);
+                // Добавляем новое изображение
                 $file = $request->file('img');
                 $fileName = $file->getClientOriginalName();
                 $input['img'] = 'assets/img/' . $fileName;
@@ -279,4 +276,133 @@ class ControlController extends Controller
         }
 
     }
+
+    // Интро
+
+    public function indexIntro()
+    {
+        $profile_intros = Intro::where('id', '>=', 1)->paginate(2);
+        $profile_blogs = Blog::where('id', '>=', 1)->paginate(4);
+        $profile_filters = Filter::where('id', '>=', 1)->paginate(4);
+        $profile_videos = Video::where('id', '>=', 1)->paginate(4);
+        $profile_features = Feature::where('id', '>=', 1)->paginate(4);
+
+
+        return view('admin.control.intro.intro_control', [
+            'intros' => $profile_intros,
+            'blogs' => $profile_blogs,
+            'videos' => $profile_videos,
+            'features' => $profile_features,
+            'filters' => $profile_filters,
+        ]);
+    }
+
+    public function indexAddIntro(Intro $intro, Request $request)
+    {
+        // Выбираем все категории для <select>
+        $intros = Intro::get('category');
+
+        // Добавление
+        if ($request->isMethod('post')) {
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным'
+
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'category' => 'required',
+                'title' => 'required|max:100',
+                'text' => 'required',
+
+            ], $massages);
+
+            if ($validator->fails()) {
+                // withInput сохраняет данные в сессию, и будет работать метод old
+                return redirect()->route('introAdd')->withErrors($validator)->withInput();
+            }
+
+
+            $intro->fill($input); // Заполняет поля модели данными
+
+            if ($intro->save()) {
+                return redirect('profile/intro-control')->with('status', 'Блок "Интро" успешно добавлен');
+            }
+
+            abort(404);
+        }
+
+        return view('admin.control.intro.introAdd_control', ['intros' => $intros]);
+
+
+    }
+
+    public function indexEditIntro(Intro $intro, Request $request) {
+
+        $intros = DB::table('intros')->select('category')->distinct()->get();
+
+        // Удаление
+        if($request->isMethod('delete')) {
+            $intro->delete();
+            return redirect('profile/intro-control')->with('status','Блок "Интро" успешно удален');
+        }
+
+        // Редактирование
+        if($request->isMethod('post')) {
+
+
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным'
+
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'category' => 'required',
+                'title' => 'required|max:100',
+                'text' => 'required',
+
+            ], $massages);
+
+            if($validator->fails()) {
+                return redirect()
+                    ->route('introEdit',['intro'=>$input['id']])
+                    ->withErrors($validator);
+            }
+
+
+            $intro->fill($input); // заполняем поля из переменной $input
+
+            if($intro->update()) {
+                return redirect('profile/intro-control')->with('status','Блок "Интро" отредактирован');
+            }
+
+        }
+
+
+        $old = $intro->toArray();
+        if(view()->exists('admin.control.intro.introEdit_control')) {
+
+            $data = [
+                'data' => $old,
+                'intros' => $intros
+            ];
+            return view('admin.control.intro.introEdit_control',$data);
+
+        }
+
+    }
+
 }
