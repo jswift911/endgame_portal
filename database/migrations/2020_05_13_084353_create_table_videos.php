@@ -17,7 +17,7 @@ class CreateTableVideos extends Migration
             $table->bigIncrements('id');
             $table->string('title', 255);
             $table->text('text');
-            $table->string('promo_img', 255);
+            $table->string('img', 255);
             $table->string('video_link', 255);
             $table->timestamps();
         });

@@ -1655,6 +1655,10 @@ ol {
 	width: 160px;
 }
 
+.control-buttons-padding {
+	padding-bottom: 30px;
+}
+
 .breadcrumb {
 	background-color: #212529;
 	margin-bottom: 0;
@@ -1727,7 +1731,6 @@ ol {
 	background-color: #7a7a7bf2;
 	border-color: black;
 	color: #131313;
-	border-radius: 10px;
 }
 
 

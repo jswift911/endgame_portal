@@ -142,7 +142,7 @@
 
 <!-- Intro section -->
 @if (isset($videos))
-<section class="intro-video-section set-bg d-flex align-items-end " data-setbg="{{ asset("$videos->promo_img") }}">
+<section class="intro-video-section set-bg d-flex align-items-end " data-setbg="{{ asset("$videos->img") }}">
     <a href="{{ $videos->video_link }}" class="video-play-btn video-popup"><img src="{{ asset('assets/img/icons/solid-right-arrow.png') }}" alt="#"></a>
     <div class="container">
         <div class="video-text">

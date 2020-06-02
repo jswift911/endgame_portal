@@ -285,18 +285,10 @@ class ControlController extends Controller
     public function indexIntro()
     {
         $profile_intros = Intro::where('id', '>=', 1)->paginate(2);
-        $profile_blogs = Blog::where('id', '>=', 1)->paginate(4);
-        $profile_filters = Filter::where('id', '>=', 1)->paginate(4);
-        $profile_videos = Video::where('id', '>=', 1)->paginate(4);
-        $profile_features = Feature::where('id', '>=', 1)->paginate(4);
 
 
         return view('admin.control.intro.intro_control', [
             'intros' => $profile_intros,
-            'blogs' => $profile_blogs,
-            'videos' => $profile_videos,
-            'features' => $profile_features,
-            'filters' => $profile_filters,
         ]);
     }
 
@@ -349,6 +341,7 @@ class ControlController extends Controller
 
     public function indexEditIntro(Intro $intro, Request $request) {
 
+        // distinct - уникальные значения (работает через DB)
         $intros = DB::table('intros')->select('category')->distinct()->get();
 
         // Удаление
@@ -409,4 +402,245 @@ class ControlController extends Controller
 
     }
 
+    // Блог
+
+    public function indexBlog()
+    {
+        $profile_blogs = Blog::where('id', '>=', 1)->paginate(2);
+        $profile_filters = Filter::where('id', '>=', 1)->paginate(4);
+
+
+        return view('admin.control.blog.blog_control', [
+            'blogs' => $profile_blogs,
+            'filters' => $profile_filters,
+        ]);
+    }
+
+    public function indexAddBlog(Blog $blog, Request $request)
+    {
+
+        // Добавление
+        if ($request->isMethod('post')) {
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png',
+                'min' => 'Текст слишком короткий',
+                'max' => 'Заголовок слишком длинный',
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'title' => 'required|max:50',
+                'text' => 'required|min:250',
+                'img' => 'required|mimes:jpg,jpeg,png',
+
+            ], $massages);
+
+            if ($validator->fails()) {
+                // withInput сохраняет данные в сессию, и будет работать метод old
+                return redirect()->route('blogAdd')->withErrors($validator)->withInput();
+            }
+
+            if($request->hasFile('img')) {
+                $file = $request->file('img'); // имя поля загрузки на сервер
+
+                $fileName = $file->getClientOriginalName(); // Получить оригинальное имя файла, без пути
+                $input['img'] = 'assets/img/' . $fileName;
+
+                // Куда, Откуда
+                $file->move(public_path().'/assets/img', $fileName); // сохраняем в каталог
+
+            }
+
+
+
+
+            $blog->fill($input); // Заполняет поля модели данными
+
+            if ($blog->save()) {
+                return redirect('profile/blog-control')->with('status', 'Раздел "Блог" успешно добавлен');
+            }
+
+            abort(404);
+        }
+
+        return view('admin.control.blog.blogAdd_control');
+
+
+    }
+
+    public function indexEditBlog(Blog $blog, Request $request) {
+
+        // Удаление
+        if($request->isMethod('delete')) {
+            File::delete($blog->img);
+            $blog->delete();
+            return redirect('profile/blog-control')->with('status','Раздел "Блог" успешно удален');
+        }
+
+        // Редактирование
+        if($request->isMethod('post')) {
+
+
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png',
+                'min' => 'Текст слишком короткий',
+                'max' => 'Заголовок слишком длинный',
+
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'title' => 'required|max:50',
+                'text' => 'required|min:250',
+                'img' => 'mimes:jpg,jpeg,png',
+
+            ], $massages);
+
+            if($validator->fails()) {
+                return redirect()
+                    ->route('blogEdit',['blog'=>$input['id']])
+                    ->withErrors($validator);
+            }
+
+            if($request->hasFile('img')) {
+                // Удаляем старое изображение
+                File::delete($input['old_images']);
+                // Добавляем новое изображение
+                $file = $request->file('img');
+                $fileName = $file->getClientOriginalName();
+                $input['img'] = 'assets/img/' . $fileName;
+                $file->move(public_path().'/assets/img', $fileName);
+            }
+            else {
+                // Если файл не загружен пользователем, используем старое из БД
+                $input['img'] = $input['old_images'];
+            }
+
+            // при сохранении удаляем лишнее в нашем случае старое изображение
+            unset($input['old_images']);
+
+
+            $blog->fill($input); // заполняем поля из переменной $input
+
+            if($blog->update()) {
+                return redirect('profile/blog-control')->with('status','Раздел "Блог" отредактирован');
+            }
+
+        }
+
+
+        $old = $blog->toArray();
+        if(view()->exists('admin.control.blog.blogEdit_control')) {
+
+            $data = [
+                'data' => $old
+            ];
+            return view('admin.control.blog.blogEdit_control',$data);
+
+        }
+
+    }
+
+    // Видео
+
+    public function indexVideo()
+    {
+        $profile_videos = Video::get(['id', 'title', 'text', 'img', 'video_link'])->first();
+        $profile_features = Feature::where('id', '>=', 1)->paginate(4);
+
+
+        return view('admin.control.video.video_control', [
+            'videos' => $profile_videos,
+            'features' => $profile_features,
+        ]);
+    }
+
+    public function indexEditVideo(Video $video, Request $request) {
+
+        // Редактирование
+        if($request->isMethod('post')) {
+
+
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png',
+                'min' => 'Текст слишком короткий',
+                'max' => 'Заголовок слишком длинный',
+                'url' => 'Значение должно быть ссылкой на видео',
+
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'title' => 'required|max:50',
+                'text' => 'required|min:50',
+                'img' => 'mimes:jpg,jpeg,png',
+                'video_link' => 'url',
+
+            ], $massages);
+
+            if($validator->fails()) {
+                return redirect()
+                    ->route('videoEdit',['video'=>$input['id']])
+                    ->withErrors($validator);
+            }
+
+            if($request->hasFile('img')) {
+                // Удаляем старое изображение
+                File::delete($input['old_images']);
+                // Добавляем новое изображение
+                $file = $request->file('img');
+                $fileName = $file->getClientOriginalName();
+                $input['img'] = 'assets/img/' . $fileName;
+                $file->move(public_path().'/assets/img', $fileName);
+            }
+            else {
+                // Если файл не загружен пользователем, используем старое из БД
+                $input['img'] = $input['old_images'];
+            }
+
+            // при сохранении удаляем лишнее в нашем случае старое изображение
+            unset($input['old_images']);
+
+
+            $video->fill($input); // заполняем поля из переменной $input
+
+            if($video->update()) {
+                return redirect('profile/video-control')->with('status','Видео отредактировано');
+            }
+
+        }
+
+
+        $old = $video->toArray();
+        if(view()->exists('admin.control.video.videoEdit_control')) {
+
+            $data = [
+                'data' => $old
+            ];
+            return view('admin.control.video.videoEdit_control', $data);
+
+        }
+
+    }
 }

@@ -13,9 +13,9 @@ class IndexController extends Controller
         $menus = Menu::get(['id','name','alias','submenu']);
         $sliders = Slider::get(['id','text', 'title', 'img']);
         $intros = Intro::take(3)->orderBy('created_at','desc')->get();
-        $blogs = Blog::take(3)->get();
+        $blogs = Blog::take(3)->orderBy('created_at','desc')->get();
         $filters = Filter::get(['id','name']);
-        $videos = Video::get(['id', 'title', 'text', 'promo_img', 'video_link'])->first();
+        $videos = Video::get(['id', 'title', 'text', 'img', 'video_link'])->first();
         $features = Feature::get(['id','text', 'title', 'img', 'created_at']);
 
         // Формируем меню

@@ -34,7 +34,6 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript" src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 
 </head>
 <body>
