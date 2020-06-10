@@ -8,7 +8,7 @@
                 <a class="btn btn-dark" href="{{ route('intro-control') }}">Интро</a>
                 <a class="btn btn-dark" href="{{ route('blog-control') }}">Блог</a>
                 <a class="btn btn-dark" href="{{ route('video-control') }}">Видео</a>
-                <a class="btn btn-dark" href="#">Features</a>
+                <a class="btn btn-dark" href="{{ route('feature-control') }}">Features</a>
             </div>
         </div>
     </div>

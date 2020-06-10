@@ -7,7 +7,7 @@ use App\{Blog, Feature, Filter, Intro, Menu, Slider, Video};
 
 class IndexController extends Controller
 {
-    public function execute(Request $request) {
+    public function execute() {
 
         // Выборка всех данных из БД. Везде можно использовать метод all();
         $menus = Menu::get(['id','name','alias','submenu']);
@@ -17,6 +17,7 @@ class IndexController extends Controller
         $filters = Filter::get(['id','name']);
         $videos = Video::get(['id', 'title', 'text', 'img', 'video_link'])->first();
         $features = Feature::get(['id','text', 'title', 'img', 'created_at']);
+
 
         // Формируем меню
 //        $menu = [];

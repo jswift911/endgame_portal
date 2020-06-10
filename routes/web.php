@@ -4,6 +4,7 @@
 // Главная
 Route::group([], function () {
     Route::match(['GET', 'POST'], '/',['uses'=>'IndexController@execute','as'=>'index']);
+    Route::match(['GET', 'POST'], '/category/{category}',['uses'=>'CategoryController@execute','as'=>'category']);
 });
 
 
@@ -54,6 +55,13 @@ Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['a
     Route::match(['GET', 'POST'],'/video-control', 'ControlController@indexVideo')->name('video-control');
     //admin/profile/video/edit/2
     Route::match(['GET', 'POST'], '/video/edit/{video}', ['uses'=>'ControlController@indexEditVideo','as'=>'videoEdit']);
+
+    //----Features----//
+
+    //admin/profile/feature-control
+    Route::match(['GET', 'POST'],'/feature-control', 'ControlController@indexFeature')->name('feature-control');
+    //admin/profile/feature/edit/2
+    Route::match(['GET', 'POST'], '/feature/edit/{feature}', ['uses'=>'ControlController@indexEditFeature','as'=>'featureEdit']);
 
 });
 

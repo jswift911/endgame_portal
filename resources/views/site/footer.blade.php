@@ -11,11 +11,7 @@
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
         </a>
         <ul class="main-menu footer-menu">
-            <li><a href="">Home</a></li>
-            <li><a href="">Games</a></li>
-            <li><a href="">Reviews</a></li>
-            <li><a href="">News</a></li>
-            <li><a href="">Contact</a></li>
+            @include('admin.widgets.header_menu')
         </ul>
         <div class="footer-social d-flex justify-content-center">
             <a href="#"><i class="fab fa-pinterest"></i></a>

@@ -560,12 +560,10 @@ class ControlController extends Controller
     public function indexVideo()
     {
         $profile_videos = Video::get(['id', 'title', 'text', 'img', 'video_link'])->first();
-        $profile_features = Feature::where('id', '>=', 1)->paginate(4);
 
 
         return view('admin.control.video.video_control', [
             'videos' => $profile_videos,
-            'features' => $profile_features,
         ]);
     }
 
@@ -639,6 +637,96 @@ class ControlController extends Controller
                 'data' => $old
             ];
             return view('admin.control.video.videoEdit_control', $data);
+
+        }
+
+    }
+
+    // Слайдер
+
+    public function indexFeature()
+    {
+        $profile_features = Feature::where('id', '>=', 1)->paginate(2);
+
+
+        return view('admin.control.feature.feature_control', [
+            'features' => $profile_features,
+        ]);
+    }
+
+    public function indexEditFeature(Feature $feature, Request $request) {
+
+        // Удаление
+        if($request->isMethod('delete')) {
+            File::delete($feature->img);
+            $feature->delete();
+            return redirect('profile/feature-control')->with('status','Блок "Feature" успешно удален');
+        }
+
+        // Редактирование
+        if($request->isMethod('post')) {
+
+
+            $input = $request->except('_token');
+
+
+            $massages = [
+
+                'required' => 'Поле :attribute обязательно к заполнению',
+                'unique' => 'Поле :attribute должно быть уникальным',
+                'mimes' => 'Изображения могут быть только формата: jpg ,jpeg, png'
+
+            ];
+
+
+            $validator = Validator::make($input, [
+
+                'title' => 'required|max:50',
+                'text' => 'required',
+                'img' => 'mimes:jpg,jpeg,png',
+
+            ], $massages);
+
+            if($validator->fails()) {
+                return redirect()
+                    ->route('featureEdit',['feature'=>$input['id']])
+                    ->withErrors($validator);
+            }
+
+            if($request->hasFile('img')) {
+                // Удаляем старое изображение
+                File::delete($input['old_images']);
+                // Добавляем новое изображение
+                $file = $request->file('img');
+                $fileName = $file->getClientOriginalName();
+                $input['img'] = 'assets/img/' . $fileName;
+                $file->move(public_path().'/assets/img', $fileName);
+            }
+            else {
+                // Если файл не загружен пользователем, используем старое из БД
+                $input['img'] = $input['old_images'];
+            }
+
+            // при сохранении удаляем лишнее в нашем случае старое изображение
+            unset($input['old_images']);
+
+
+            $feature->fill($input); // заполняем поля из переменной $input
+
+            if($feature->update()) {
+                return redirect('profile/feature-control')->with('status','Блок "Feature" отредактирован');
+            }
+
+        }
+
+
+        $old = $feature->toArray();
+        if(view()->exists('admin.control.feature.featureEdit_control')) {
+
+            $data = [
+                'data' => $old
+            ];
+            return view('admin.control.feature.featureEdit_control',$data);
 
         }
 

@@ -25,7 +25,7 @@
             @foreach ($intros as $intro_item)
             <div class="col-md-4">
                 <div class="intro-text-box text-box text-white">
-                    <div class="top-meta">{{ $intro_item->created_at->format('d.m.Y') }}  /  in <a href="">{{ $intro_item->category }}</a></div>
+                    <div class="top-meta">{{ $intro_item->created_at->format('d.m.Y') }}  /  in <a href="{{ route('category', ['category'=>$intro_item->category]) }}">{{ $intro_item->category }}</a></div>
                     <h3>{{ $intro_item->title }}</h3>
                     <p>{{ mb_strimwidth($intro_item->text, 0, 170, '....') }}</p>
                     <a href="#" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
