@@ -28,7 +28,7 @@
                     <div class="top-meta">{{ $intro_item->created_at->format('d.m.Y') }}  /  in <a href="{{ route('category', ['category'=>$intro_item->category]) }}">{{ $intro_item->category }}</a></div>
                     <h3>{{ $intro_item->title }}</h3>
                     <p>{{ mb_strimwidth($intro_item->text, 0, 170, '....') }}</p>
-                    <a href="#" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
+                    <a href="{{ route('category', ['category'=>$intro_item->category]) }}" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
                 </div>
             </div>
             @endforeach
@@ -62,77 +62,14 @@
                     </div>
                     @endif
                     <div class="blog-text text-box text-white">
-                        <div class="top-meta">{{ $blog_item->created_at->format('d.m.Y') }}  /  in <a href="">Games</a></div>
+                        <div class="top-meta">{{ $blog_item->created_at->format('d.m.Y') }}  /  in <a href="{{ route('game', ['game' => $blog_item->id]) }}">Games</a></div>
                         <h3>{{ $blog_item->title }}</h3>
                         <p>{{ mb_strimwidth($blog_item->text, 0, 300, '.....') }}</p>
-                        <a href="#" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
+                        <a href="{{ route('game', ['game' => $blog_item->id]) }}" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
                     </div>
                 </div>
                 @endforeach
             </div>
-{{--            <div class="col-xl-3 col-lg-4 col-md-5 sidebar">--}}
-{{--                <div id="stickySidebar">--}}
-{{--                    <div class="widget-item">--}}
-{{--                        <h4 class="widget-title">Trending</h4>--}}
-{{--                        <div class="trending-widget">--}}
-{{--                            <div class="tw-item">--}}
-{{--                                <div class="tw-thumb">--}}
-{{--                                    <img src="{{ asset('assets/img/blog-widget/1.jpg') }}" alt="#">--}}
-{{--                                </div>--}}
-{{--                                <div class="tw-text">--}}
-{{--                                    <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>--}}
-{{--                                    <h5>The best online game is out now!</h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="tw-item">--}}
-{{--                                <div class="tw-thumb">--}}
-{{--                                    <img src="{{ asset('assets/img/blog-widget/2.jpg') }}" alt="#">--}}
-{{--                                </div>--}}
-{{--                                <div class="tw-text">--}}
-{{--                                    <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>--}}
-{{--                                    <h5>The best online game is out now!</h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="tw-item">--}}
-{{--                                <div class="tw-thumb">--}}
-{{--                                    <img src="{{ asset('assets/img/blog-widget/3.jpg') }}" alt="#">--}}
-{{--                                </div>--}}
-{{--                                <div class="tw-text">--}}
-{{--                                    <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>--}}
-{{--                                    <h5>The best online game is out now!</h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="tw-item">--}}
-{{--                                <div class="tw-thumb">--}}
-{{--                                    <img src="{{ asset('assets/img/blog-widget/4.jpg') }}" alt="#">--}}
-{{--                                </div>--}}
-{{--                                <div class="tw-text">--}}
-{{--                                    <div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>--}}
-{{--                                    <h5>The best online game is out now!</h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="widget-item">--}}
-{{--                        <div class="categories-widget">--}}
-{{--                            <h4 class="widget-title">categories</h4>--}}
-{{--                            <ul>--}}
-{{--                                <li><a href="">Games</a></li>--}}
-{{--                                <li><a href="">Gaming Tips & Tricks</a></li>--}}
-{{--                                <li><a href="">Online Games</a></li>--}}
-{{--                                <li><a href="">Team Games</a></li>--}}
-{{--                                <li><a href="">Community</a></li>--}}
-{{--                                <li><a href="">Uncategorized</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="widget-item">--}}
-{{--                        <a href="#" class="add">--}}
-{{--                            <img src="{{ asset('assets/img/add.jpg') }}" alt="">--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     </div>
 </section>

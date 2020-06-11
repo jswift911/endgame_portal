@@ -4,9 +4,17 @@
 // Главная
 Route::group([], function () {
     Route::match(['GET', 'POST'], '/',['uses'=>'IndexController@execute','as'=>'index']);
-    Route::match(['GET', 'POST'], '/category/{category}',['uses'=>'CategoryController@execute','as'=>'category']);
 });
 
+// Категории (Games, Reviews, Playstation)
+Route::group(['prefix' => 'category'], function () {
+    Route::match(['GET', 'POST'], '/{category}',['uses'=>'CategoryController@execute','as'=>'category']);
+});
+
+// Одна игра
+Route::group(['prefix' => 'game'], function () {
+    Route::match(['GET', 'POST'], '/{game}',['uses'=>'GameController@execute','as'=>'game']);
+});
 
 // Admin (profile)
 Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {

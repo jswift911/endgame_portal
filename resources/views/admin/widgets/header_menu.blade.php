@@ -1,5 +1,5 @@
 @foreach ($menu as $item)
-    <li><a href="{{ $item->alias }}">{{ $item->name }}</a>
+    <li><a href="{{ route('index') . '/' .$item->alias }}">{{ $item->name }}</a>
         @if (isset($item->submenu))
             <ul class="sub-menu">
                 {{--Пробел заменяем на тире--}}
