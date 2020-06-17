@@ -1758,6 +1758,18 @@ ol {
 	list-style-type: none;
 }
 
+/* Game */
+.game-single-content img {
+	max-width: 300px;
+	margin-bottom: 30px;
+}
+
+/* Features */
+.game-single-content.features-img img {
+	max-width: 100%;
+	margin-bottom: 30px;
+}
+
 /* ----------------
   Responsive
 ---------------------*/

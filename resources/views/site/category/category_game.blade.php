@@ -17,18 +17,18 @@
                 @endif
 
 
-                @if (Auth::check())
-                    <div class="user-panel steam-login">
-                        <a href="{{ route('profile') }}"><img src="{{ Auth::user()->avatar }}" alt=""></a>
-                        <div class="steam-info-main">
-                            <p class="font-italic steam-login-nickname"><b><a href="{{ route('profile') }}">{{ Auth::user()->username }}</a></b></p>
-                            <p class="steam-login-logout"><a href="steamlogout">Выйти</a></p></div>
-                    </div>
-                @else
-                    <div class="user-panel">
-                        <a href="auth/steam">Login as Steam &nbsp;<i class="fab fa-steam"></i></a>
-                    </div>
-            @endif
+                    @if (Auth::check())
+                        <div class="user-panel steam-login">
+                            <a href="{{ route('profile') }}"><img src="{{ Auth::user()->avatar }}" alt=""></a>
+                            <div class="steam-info-main">
+                                <p class="font-italic steam-login-nickname"><b><a href="{{ route('profile') }}">{{ Auth::user()->username }}</a></b></p>
+                                <p class="steam-login-logout"><a href="{{ route('index') . '/' . 'steamlogout'}}">Выйти</a></p></div>
+                        </div>
+                    @else
+                        <div class="user-panel">
+                            <a href="{{ route('index') . '/' . 'auth/steam'}}">Login as Steam &nbsp;<i class="fab fa-steam"></i></a>
+                        </div>
+                @endif
                 <!-- Menu -->
                 <ul class="main-menu primary-menu">
                     @include('admin.widgets.header_menu')
@@ -42,10 +42,10 @@
 <!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="{{ asset("$sliders->img") }}">
     <div class="page-info">
-        <h2>{{ $category }}</h2>
+        <h2>Games</h2>
         <div class="site-breadcrumb">
             <a href="{{route('index')}}">Home</a>  /
-            <span>{{ $category }}</span>
+            <span>Games</span>
         </div>
     </div>
 </section>
@@ -58,14 +58,15 @@
 <section class="games-single-page">
     <div class="container">
 {{--        <div class="game-single-preview">--}}
-{{--            <img src="{{ asset("$sliders->img") }}" alt="">--}}
+{{--            <img src="{{ asset("$game->img") }}" alt="">--}}
 {{--        </div>--}}
         <div class="row">
             <div class="col-xl-9 col-lg-8 col-md-7 game-single-content">
-                <div class="gs-meta">{{ $intro->created_at }}  /  in <a href="">{{ $category }}</a></div>
-                <h2 class="gs-title">{{ $intro->title }}</h2>
+                <div class="gs-meta">{{ $game->created_at }}  /  in <a href="">Games</a></div>
+                <img src="{{ asset("$game->img") }}" alt="">
+                <h2 class="gs-title">{{ $game->title }}</h2>
                 <h4>Gameplay</h4>
-                <p>{{ $intro->text }}</p>
+                <p>{{ $game->text }}</p>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-5 sidebar game-page-sideber">
                 <div id="stickySidebar">

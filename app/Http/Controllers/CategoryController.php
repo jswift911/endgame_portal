@@ -15,14 +15,16 @@ class CategoryController extends Controller
 
         $menus = Menu::get(['id', 'name', 'alias', 'submenu']);
         $sliders = Slider::get(['id', 'text', 'title', 'img'])->first();
-        $intro_one = DB::table('intros')->where('category', '=', $category)->first();
+        $intros = DB::table('intros')->where('category', '=', $category)->get();
+
+        //dd($intros->first());
 
 
-        if (isset($intro_one->category) && $intro_one->category == $category) {
+        if (isset($intros->first()->category) && $intros->first()->category == $category) {
             return view('site.category.category_index', [
                 'menu' => $menus,
                 'sliders' => $sliders,
-                'intro' => $intro_one,
+                'intro' => $intros,
                 'category' => $category,
             ]);
         }

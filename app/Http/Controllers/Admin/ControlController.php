@@ -295,7 +295,7 @@ class ControlController extends Controller
     public function indexAddIntro(Intro $intro, Request $request)
     {
         // Выбираем все категории для <select>
-        $intros = Intro::get('category');
+        $intros = Intro::get('category')->unique('category'); // уникальные категории
 
         // Добавление
         if ($request->isMethod('post')) {
@@ -429,14 +429,14 @@ class ControlController extends Controller
                 'required' => 'Поле :attribute обязательно к заполнению',
                 'unique' => 'Поле :attribute должно быть уникальным',
                 'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png',
-                'min' => 'Текст слишком короткий',
+                'min' => 'Текст слишком короткий в поле :attribute',
                 'max' => 'Заголовок слишком длинный',
             ];
 
 
             $validator = Validator::make($input, [
 
-                'title' => 'required|max:50',
+                'title' => 'required|min:27|max:50',
                 'text' => 'required|min:250',
                 'img' => 'required|mimes:jpg,jpeg,png',
 
@@ -496,7 +496,7 @@ class ControlController extends Controller
                 'required' => 'Поле :attribute обязательно к заполнению',
                 'unique' => 'Поле :attribute должно быть уникальным',
                 'mimes' => 'Изображения могут быть только формата: jpg, jpeg, png',
-                'min' => 'Текст слишком короткий',
+                'min' => 'Текст слишком короткий в поле :attribute',
                 'max' => 'Заголовок слишком длинный',
 
             ];
@@ -504,7 +504,7 @@ class ControlController extends Controller
 
             $validator = Validator::make($input, [
 
-                'title' => 'required|max:50',
+                'title' => 'required|min:27|max:50',
                 'text' => 'required|min:250',
                 'img' => 'mimes:jpg,jpeg,png',
 

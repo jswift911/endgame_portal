@@ -100,10 +100,10 @@
     <div class="featured-bg set-bg" data-setbg="{{ asset("$featured_item->img") }}"></div>
     <div class="featured-box">
         <div class="text-box">
-            <div class="top-meta">{{ $featured_item->created_at->format('d.m.Y') }}  /  in <a href="">Games</a></div>
+            <div class="top-meta">{{ $featured_item->created_at->format('d.m.Y') }}  /  in <a href="{{ route('features') }}">Features</a></div>
             <h3>{{ $featured_item->title }}</h3>
             <p>{{ mb_strimwidth($featured_item->text, 0, 550, '...') }}</p>
-            <a href="#" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
+            <a href="{{ route('features') }}" class="read-more">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
         </div>
     </div>
     @endforeach

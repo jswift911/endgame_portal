@@ -6,6 +6,8 @@ Route::group([], function () {
     Route::match(['GET', 'POST'], '/',['uses'=>'IndexController@execute','as'=>'index']);
 });
 
+
+
 // Категории (Games, Reviews, Playstation)
 Route::group(['prefix' => 'category'], function () {
     Route::match(['GET', 'POST'], '/{category}',['uses'=>'CategoryController@execute','as'=>'category']);
@@ -15,6 +17,14 @@ Route::group(['prefix' => 'category'], function () {
 Route::group(['prefix' => 'game'], function () {
     Route::match(['GET', 'POST'], '/{game}',['uses'=>'GameController@execute','as'=>'game']);
 });
+
+// Features блок
+Route::group(['prefix' => 'features'], function () {
+    Route::match(['GET', 'POST'], '/',['uses'=>'FeaturesController@execute','as'=>'features']);
+});
+
+
+
 
 // Admin (profile)
 Route::group(['prefix' => 'profile', 'namespace' => 'Admin', 'middleware' => ['auth'] ], function () {
