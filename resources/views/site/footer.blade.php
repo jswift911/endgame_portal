@@ -14,11 +14,11 @@
             @include('admin.widgets.header_menu')
         </ul>
         <div class="footer-social d-flex justify-content-center">
-            <a href="#"><i class="fab fa-pinterest"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-dribbble"></i></a>
-            <a href="#"><i class="fab fa-behance"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-pinterest"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-facebook"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-dribbble"></i></a>
+            <a href="javascript:void(0);"><i class="fab fa-behance"></i></a>
         </div>
         <div class="copyright"><a href="">Colorlib</a> 2018 @ All rights reserved</div>
     </div>

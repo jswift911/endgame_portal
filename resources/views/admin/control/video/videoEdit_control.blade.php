@@ -35,7 +35,7 @@
                                 <img src="{{ '/'.$data['img'] }}" class="img-circle img-responsive" width="150px" alt="">
                                 <input name="old_images" type="hidden" value="{{ $data['img'] }}" id="old_images">
                             <p>Промо-изображение (рекомендуемый размер 1920х757): <p>
-                                <input class="filestyle" data-buttonText="Выберите изображение" data-buttonName="btn-primary" data-placeholder="Выберите файл" name="img" type="file" id="img">
+                                <input class="filestyle" data-buttonText="Выберите изображение" data-buttonName="btn-primary" data-placeholder="{{ $data['img'] }}" name="img" type="file" id="img">
                             <div class="control-buttons">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
                             </div>
