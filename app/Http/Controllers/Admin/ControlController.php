@@ -38,7 +38,7 @@ class ControlController extends Controller
         if ($request->isMethod('post')) {
             $input = $request->except('_token');
             // Автоматическое создание алиаса и транслитерация автоматом внедрена
-            $input['alias'] = Str::slug($request->name, '-');
+            $input['alias'] = ucfirst(Str::slug($request->name, '-'));
 
             $massages = [
 
@@ -88,7 +88,7 @@ class ControlController extends Controller
 
             $input = $request->except('_token');
             // Автоматическое создание алиаса и транслитерация автоматом внедрена
-            $input['alias'] = Str::slug($request->name, '-');
+            $input['alias'] = ucfirst(Str::slug($request->name, '-'));
 
             $massages = [
 

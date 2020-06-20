@@ -79,6 +79,13 @@ $(window).on('load', function() {
 	    bottomSpacing: 60
 	});
 
+	/*------------------
+      Read more slider
+    -----------------*/
+	$('.site-btn.scroll-down').click(function(){
+		$('html, body').animate({scrollTop:$('#blog').position().top}, 1400);
+	});
+
 
 })(jQuery);
 

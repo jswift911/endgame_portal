@@ -7,7 +7,7 @@
             <div class="container">
                 <h2>{{ $slide->title }}</h2>
                 <p>{{ $slide->text }}</p>
-                <a href="#" class="site-btn">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
+                <a href="#blog" class="site-btn scroll-down">Read More  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></a>
             </div>
         </div>
         @endforeach
@@ -41,7 +41,7 @@
 
 <!-- Blog section -->
 @if (isset($blogs))
-<section class="blog-section spad">
+<section class="blog-section spad" id="blog">
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12">
@@ -120,7 +120,7 @@
         <h2>Subscribe to our newsletter</h2>
         <form class="newsletter-form">
             <input type="text" placeholder="ENTER YOUR E-MAIL">
-            <button class="site-btn">subscribe  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt="#"/></button>
+            <button class="site-btn" type="submit">subscribe  <img src="{{ asset('assets/img/icons/double-arrow.png') }}" alt=""/></button>
         </form>
     </div>
 </section>

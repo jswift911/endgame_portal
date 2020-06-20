@@ -7,6 +7,16 @@ Route::group([], function () {
 });
 
 
+// Контакты
+Route::get('/page/Contacts', ['uses'=>'MenuController@contacts','as'=>'contacts']);
+
+// Подменю
+Route::get('/page/Game-Single', ['uses'=>'MenuController@single','as'=>'single']);
+
+// Меню (страницы остальные динамические)
+Route::group(['prefix' => 'page'], function () {
+    Route::match(['GET', 'POST'], '/{page}',['uses'=>'MenuController@execute','as'=>'page']);
+});
 
 // Категории (Games, Reviews, Playstation)
 Route::group(['prefix' => 'category'], function () {
