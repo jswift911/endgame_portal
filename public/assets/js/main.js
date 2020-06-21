@@ -86,6 +86,12 @@ $(window).on('load', function() {
 		$('html, body').animate({scrollTop:$('#blog').position().top}, 1400);
 	});
 
+	/*------------------
+    	Сессии
+	--------------------*/
+	//Если есть элемент - скрыть (можно без условия)
+	$(".alert").delay(2500).fadeOut("slow");
+
 
 })(jQuery);
 
