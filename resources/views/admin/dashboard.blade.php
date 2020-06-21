@@ -11,9 +11,8 @@
         <section class="blog-section spad-profile profile">
             <div class="container">
                 <div class="row">
-
                 @include('admin.widgets.steam_panel')
-
+                    {{--Админ--}}
                     @if (Auth::user()->role == 'admin')
                     <div class="col-xl-8 col-lg-8 col-md-8">
                         <h2 class="profile_title">Список пользователей</h2>
@@ -43,9 +42,33 @@
                         {{ $profile_admin->links() }}
                     </div>
                     @endif
+                    {{--Пользователь--}}
+                    @if (Auth::user()->role == 'user')
+                        <div class="col-xl-8 col-lg-8 col-md-8">
+                            <h2 class="profile_title">Информация об аккаунте</h2>
+                            <table class="table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Steam_id</th>
+                                    <th scope="col">Права доступа</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="https://steamcommunity.com/profiles/{{ Auth::user()->steamid }}/">{{ Auth::user()->username }}</a></td>
+                                        <td>{{ Auth::user()->steamid }}</td>
+                                        <td>@if (Auth::user()->role == 'admin') Администратор @else Пользователь @endif</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="user_padding"></div>
+                        </div>
+                    @endif
                 </div>
-                    @include('admin.widgets.footer_panel')
+                @include('admin.widgets.footer_panel')
             </div>
+            @if (Auth::user()->role == 'user') @include('site.footer', ['menu' => \App\Menu::get(['id', 'name', 'alias', 'submenu'])]) @endif
         </section>
     </div>
     <!-- Blog section end -->

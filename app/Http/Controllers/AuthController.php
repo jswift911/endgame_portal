@@ -83,6 +83,12 @@ class AuthController extends Controller
                 $user->username = $info->personaname;
                 $user->save();
             }
+
+            // Если пользователь изменил аватар, меняем его в БД
+            if ($user->avatar != $info->avatarfull) {
+                $user->avatar = $info->avatarfull;
+                $user->save();
+            }
             return $user;
         }
 
