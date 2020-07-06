@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://lee-web.online/public/assets/promo_github/main.jpg" width="400" height="800">
+    <img src="https://lee-web.online/public/assets/promo_github/main.jpg" width="400">
     <img src="https://lee-web.online/public/assets/promo_github/profile.jpg" width="400">
     <img src="https://lee-web.online/public/assets/promo_github/video.jpg" width="400">
     <img src="https://lee-web.online/public/assets/promo_github/slider.jpg" width="400">
