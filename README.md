@@ -12,6 +12,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Описание:
+Игровой портал с авторизацией через Steam <a href="https://store.steampowered.com"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1200px-Steam_icon_logo.svg.png" width="16" height="16"></a> и администраторской панелью, позволяющей управлять всем контентом сайта динамически.
+
 ## Технологии:
 <ul>
 <li>PHP-фреймворк Laravel 5.8</li>
