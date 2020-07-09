@@ -13,7 +13,7 @@
 </p>
 
 ## Описание:
-Игровой портал с авторизацией через Steam <a href="https://store.steampowered.com"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1200px-Steam_icon_logo.svg.png" width="16" height="16"></a> и администраторской панелью, позволяющей управлять всем контентом сайта динамически.
+Игровой портал с авторизацией через Steam <a href="https://store.steampowered.com"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1200px-Steam_icon_logo.svg.png" width="16" height="16"></a> и админ-панелью, позволяющей управлять всем контентом сайта динамически.
 
 ## Технологии:
 <ul>
